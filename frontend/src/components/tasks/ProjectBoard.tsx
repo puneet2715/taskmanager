@@ -165,31 +165,65 @@ export const ProjectBoard: React.FC<ProjectBoardProps> = ({
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center space-x-4">
-          <ProjectSelector
-            selectedProjectId={projectId}
-            onProjectChange={onProjectChange}
-          />
-          <button
-            onClick={handleCreateTask}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Add Task
-          </button>
-          <button
-            onClick={handleOpenSummaryModal}
-            disabled={!isAIAvailable}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
-              isAIAvailable
-                ? 'bg-purple-600 text-white hover:bg-purple-700'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
-            title={isAIAvailable ? 'Open AI Summary' : 'AI service is not available'}
-          >
-            <Sparkles className="w-4 h-4" />
-            <span>AI Summary</span>
-          </button>
+      <div className="mb-4 sm:mb-6">
+        {/* Mobile Layout */}
+        <div className="block sm:hidden">
+          <div className="mb-3">
+            <ProjectSelector
+              selectedProjectId={projectId}
+              onProjectChange={onProjectChange}
+            />
+          </div>
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={handleCreateTask}
+              className="flex-1 bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+            >
+              Add Task
+            </button>
+            <button
+              onClick={handleOpenSummaryModal}
+              disabled={!isAIAvailable}
+              className={`flex items-center justify-center space-x-1 px-3 py-2 rounded-lg transition-colors text-sm ${
+                isAIAvailable
+                  ? 'bg-purple-600 text-white hover:bg-purple-700'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
+              title={isAIAvailable ? 'Open AI Summary' : 'AI service is not available'}
+            >
+              <Sparkles className="w-4 h-4" />
+              <span className="hidden xs:inline">AI</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Desktop Layout */}
+        <div className="hidden sm:flex sm:items-center sm:justify-between">
+          <div className="flex items-center space-x-4">
+            <ProjectSelector
+              selectedProjectId={projectId}
+              onProjectChange={onProjectChange}
+            />
+            <button
+              onClick={handleCreateTask}
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Add Task
+            </button>
+            <button
+              onClick={handleOpenSummaryModal}
+              disabled={!isAIAvailable}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+                isAIAvailable
+                  ? 'bg-purple-600 text-white hover:bg-purple-700'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
+              title={isAIAvailable ? 'Open AI Summary' : 'AI service is not available'}
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>AI Summary</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -200,7 +234,7 @@ export const ProjectBoard: React.FC<ProjectBoardProps> = ({
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
-        <div className={`flex-1 flex space-x-6 overflow-x-auto ${isDragInProgress ? 'select-none' : ''}`}>
+        <div className={`flex-1 flex space-x-3 sm:space-x-6 overflow-x-auto pb-4 ${isDragInProgress ? 'select-none' : ''}`}>
           {TASK_STATUSES.map((status) => (
             <TaskColumn
               key={status.key}

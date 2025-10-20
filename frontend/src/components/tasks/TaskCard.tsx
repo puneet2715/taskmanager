@@ -105,7 +105,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
     <div
       ref={setNodeRef}
       style={style}
-      className={`bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow ${
+      className={`bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow ${
         isSortableDragging ? 'opacity-50' : ''
       } ${isDragging ? 'shadow-lg' : ''}`}
       data-testid={`task-card-${task._id}`}
@@ -113,19 +113,19 @@ export const TaskCard: React.FC<TaskCardProps> = ({
     >
       {/* Task Header */}
       <div className="flex items-start justify-between mb-2">
-        <div className="flex items-start space-x-2 flex-1">
+        <div className="flex items-start space-x-2 flex-1 min-w-0">
           {/* Drag Handle */}
           <div 
-            className="text-gray-400 hover:text-gray-600 cursor-grab active:cursor-grabbing mt-1"
+            className="text-gray-400 hover:text-gray-600 cursor-grab active:cursor-grabbing mt-1 flex-shrink-0"
             title="Drag to move task"
             {...listeners}
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8h16M4 16h16" />
             </svg>
           </div>
           <h4 
-            className="font-medium text-gray-900 flex-1 pr-2 cursor-pointer hover:text-blue-600"
+            className="font-medium text-gray-900 flex-1 cursor-pointer hover:text-blue-600 text-sm sm:text-base line-clamp-2"
             onClick={(e) => {
               e.stopPropagation();
               onEdit();
@@ -134,7 +134,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             {task.title}
           </h4>
         </div>
-        <div className="flex items-center space-x-1">
+        <div className="flex items-center space-x-1 flex-shrink-0 ml-2">
           <button
             onClick={handleAIClick}
             disabled={!isAIAvailable}
@@ -145,7 +145,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             }`}
             title={isAIAvailable ? 'Ask AI about this task' : 'AI service is not available'}
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
           </button>
           <button
             onClick={(e) => {
@@ -155,7 +155,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             className="text-gray-400 hover:text-blue-600 p-1"
             title="Edit task"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
             </svg>
           </button>
@@ -165,7 +165,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             title="Delete task"
             disabled={deleteTaskMutation.isPending}
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
           </button>
@@ -174,14 +174,14 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 
       {/* Task Description */}
       {task.description && (
-        <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+        <p className="text-gray-600 text-xs sm:text-sm mb-2 sm:mb-3 line-clamp-2">
           {task.description}
         </p>
       )}
 
       {/* Task Metadata */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-2">
+      <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+        <div className="flex flex-wrap items-center gap-2">
           {/* Priority Badge */}
           <span className={`px-2 py-1 rounded-full text-xs font-medium ${PRIORITY_COLORS[task.priority]}`}>
             {PRIORITY_LABELS[task.priority]}
@@ -197,21 +197,23 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 
         {/* Assignee */}
         {task.assignee && (
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center space-x-1 flex-shrink-0">
             {getAssigneeAvatar(task.assignee) ? (
               <Image
                 src={getAssigneeAvatar(task.assignee)!}
                 alt={getAssigneeName(task.assignee) || 'Assignee'}
-                className="w-6 h-6 rounded-full"
+                className="w-5 h-5 sm:w-6 sm:h-6 rounded-full"
+                width={24}
+                height={24}
               />
             ) : (
-              <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center">
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gray-300 flex items-center justify-center">
                 <span className="text-xs text-gray-600">
                   {getAssigneeName(task.assignee)?.charAt(0) || '?'}
                 </span>
               </div>
             )}
-            <span className="text-xs text-gray-600">
+            <span className="text-xs text-gray-600 truncate max-w-20 sm:max-w-none">
               {getAssigneeName(task.assignee)}
             </span>
           </div>

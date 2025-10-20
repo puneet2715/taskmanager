@@ -56,7 +56,7 @@ export default function DashboardClient({ user, initialProjects }: DashboardClie
 
     // Calculate task statistics from real data
     const activeTasks = allTasks.filter(task => task.status !== 'done').length;
-    
+
     // Calculate tasks due this week
     const now = new Date();
     const oneWeekFromNow = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
@@ -306,7 +306,7 @@ export default function DashboardClient({ user, initialProjects }: DashboardClie
                             </div>
                           </div>
                           <div className="flex items-center justify-end sm:ml-4">
-                            <button 
+                            <button
                               onClick={() => {
                                 console.log('Navigating to project:', project._id, `/projects/${project._id}`);
                                 handleViewProject(project._id);

@@ -120,8 +120,55 @@ export default function ProjectDetailClient({ projectId, user }: ProjectDetailCl
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="border-b bg-white shadow-sm">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+        <div className="mx-auto max-w-7xl px-4 py-4 sm:py-6 sm:px-6 lg:px-8">
+          {/* Mobile Layout */}
+          <div className="block lg:hidden">
+            <div className="flex items-center justify-between mb-4">
+              <button
+                onClick={handleBackToDashboard}
+                className="flex items-center space-x-2 text-gray-600 transition-colors hover:text-gray-900"
+              >
+                <ArrowLeft className="h-5 w-5" />
+                <span className="text-sm">Back</span>
+              </button>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => setIsAddMemberModalOpen(true)}
+                  className="flex items-center justify-center rounded-lg bg-blue-600 p-2 text-white transition-colors hover:bg-blue-700"
+                  title="Add Member"
+                >
+                  <UserPlus className="h-4 w-4" />
+                </button>
+                <button
+                  onClick={() => setIsSettingsModalOpen(true)}
+                  className="flex items-center justify-center rounded-lg bg-gray-100 p-2 text-gray-700 transition-colors hover:bg-gray-200"
+                  title="Settings"
+                >
+                  <Settings className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+            <div className="mb-3">
+              <h1 className="text-xl font-bold text-gray-900 line-clamp-2">{project.name}</h1>
+              {project.description && (
+                <p className="mt-1 text-sm text-gray-600 line-clamp-2">{project.description}</p>
+              )}
+            </div>
+            <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500">
+              <span className="flex items-center space-x-1">
+                <Users className="h-3 w-3" />
+                <span>{Array.isArray(project.members) ? project.members.length : 0} members</span>
+              </span>
+              <span className="flex items-center space-x-1">
+                <Calendar className="h-3 w-3" />
+                <span>Updated {formatDate(project.updatedAt)}</span>
+              </span>
+              <UserPresence className="border-l border-gray-300 pl-3" />
+            </div>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden lg:flex lg:items-center lg:justify-between">
             <div className="flex items-center space-x-4">
               <button
                 onClick={handleBackToDashboard}
@@ -167,8 +214,8 @@ export default function ProjectDetailClient({ projectId, user }: ProjectDetailCl
       </div>
 
       {/* Main Content */}
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="h-[calc(100vh-200px)]">
+      <div className="mx-auto max-w-7xl px-4 py-4 sm:py-8 sm:px-6 lg:px-8">
+        <div className="h-[calc(100vh-140px)] sm:h-[calc(100vh-180px)] lg:h-[calc(100vh-200px)]">
           <ProjectBoard
             projectId={projectId}
             onProjectChange={newProjectId => {
