@@ -62,6 +62,7 @@ A modern, real-time collaborative task management application built with the MER
 - **MongoDB** - Database
 - **Redis** - Caching layer
 - **Nginx** - Reverse proxy (production)
+- **Infisical** - Secret management and environment variables
 
 ## 📋 Prerequisites
 
@@ -83,6 +84,8 @@ Before running this application, make sure you have the following installed:
    ```
 
 2. **Set up environment variables**
+
+   **Option A: Using .env file (Traditional)**
    ```bash
    cp .env.example .env
    ```
@@ -119,6 +122,28 @@ Before running this application, make sure you have the following installed:
    GEMINI_API_KEY=your-gemini-api-key
    ```
 
+   **Option B: Using Infisical (Recommended for Production)**
+   
+   This project supports [Infisical](https://infisical.com/) for secure environment variable management:
+   
+   1. **Set up Infisical tokens**:
+      ```bash
+      # Create .env with only Infisical tokens
+      echo "INFISICAL_TOKEN_NEXT_FE=your-frontend-infisical-token" > .env
+      echo "INFISICAL_TOKEN_NEXT_BE=your-backend-infisical-token" >> .env
+      ```
+   
+   2. **Configure your Infisical project** with the required environment variables listed above
+   
+   3. **The application will automatically fetch** all other environment variables from Infisical at runtime
+   
+   **Benefits of using Infisical**:
+   - 🔒 Centralized secret management
+   - 🔄 Automatic secret rotation
+   - 👥 Team collaboration on secrets
+   - 📊 Audit logs for secret access
+   - 🌍 Environment-specific configurations
+
 3. **Start the application**
    ```bash
    docker-compose up -d
@@ -141,7 +166,7 @@ Before running this application, make sure you have the following installed:
 2. **Setup MongoDB and Redis**
    - Install and start MongoDB locally
    - Install and start Redis locally
-   - Update connection strings in `.env`
+   - Update connection strings in `.env` or configure in Infisical
 
 3. **Install dependencies**
    ```bash
@@ -178,6 +203,10 @@ Before running this application, make sure you have the following installed:
 
 ## 🔧 Environment Variables
 
+This project supports two methods for environment variable management:
+
+### Method 1: Traditional .env Files
+
 ### Required Variables
 
 | Variable | Description | Example |
@@ -201,6 +230,33 @@ Before running this application, make sure you have the following installed:
 | `GOOGLE_CLIENT_ID` | Google OAuth client ID | Google authentication |
 | `GOOGLE_CLIENT_SECRET` | Google OAuth client secret | Google authentication |
 | `GEMINI_API_KEY` | Google Gemini API key | AI features |
+
+### Method 2: Infisical Integration (Recommended)
+
+This project is configured to work with [Infisical](https://infisical.com/) for secure secret management:
+
+#### Infisical Setup
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `INFISICAL_TOKEN_NEXT_FE` | Frontend Infisical service token | ✅ |
+| `INFISICAL_TOKEN_NEXT_BE` | Backend Infisical service token | ✅ |
+
+#### Infisical Benefits
+- **🔒 Security**: Encrypted secret storage with access controls
+- **🔄 Rotation**: Automatic secret rotation capabilities  
+- **👥 Collaboration**: Team-based secret management
+- **📊 Auditing**: Complete audit logs for secret access
+- **🌍 Multi-Environment**: Separate configs for dev/staging/prod
+- **🚀 CI/CD Integration**: Seamless deployment pipeline integration
+
+#### Setting up Infisical
+1. Create an account at [Infisical](https://infisical.com/)
+2. Create a new project for your task manager
+3. Add all the required environment variables to your Infisical project
+4. Generate service tokens for frontend and backend
+5. Set the `INFISICAL_TOKEN_NEXT_FE` and `INFISICAL_TOKEN_NEXT_BE` in your `.env` file
+6. The application will automatically fetch all other secrets from Infisical
 
 ## 📱 API Documentation
 
