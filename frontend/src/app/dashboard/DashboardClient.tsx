@@ -142,95 +142,100 @@ export default function DashboardClient({ user, initialProjects }: DashboardClie
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="border-b bg-white shadow-sm">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Welcome back, {user.name}!</h1>
-              <p className="mt-1 text-gray-600">
+        <div className="mx-auto max-w-7xl px-4 py-4 sm:py-6 sm:px-6 lg:px-8">
+          <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+            <div className="min-w-0 flex-1">
+              <h1 className="text-xl font-bold text-gray-900 sm:text-2xl lg:text-3xl">
+                Welcome back, {user.name}!
+              </h1>
+              <p className="mt-1 text-sm text-gray-600 sm:text-base">
                 Here&apos;s what&apos;s happening with your projects today.
               </p>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-3">
               <button
                 onClick={handleCreateTask}
-                className="flex items-center space-x-2 rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
+                className="flex items-center justify-center space-x-2 rounded-lg bg-blue-600 px-3 py-2 text-sm text-white transition-colors hover:bg-blue-700 sm:px-4"
               >
                 <Plus className="h-4 w-4" />
-                <span>New Task</span>
+                <span className="hidden sm:inline">New Task</span>
+                <span className="sm:hidden">Task</span>
               </button>
               <button
                 onClick={handleCreateProject}
-                className="flex items-center space-x-2 rounded-lg bg-indigo-600 px-4 py-2 text-white transition-colors hover:bg-indigo-700"
+                className="flex items-center justify-center space-x-2 rounded-lg bg-indigo-600 px-3 py-2 text-sm text-white transition-colors hover:bg-indigo-700 sm:px-4"
               >
                 <Plus className="h-4 w-4" />
-                <span>New Project</span>
+                <span className="hidden sm:inline">New Project</span>
+                <span className="sm:hidden">Project</span>
               </button>
               <button
                 onClick={handleLogout}
-                className="flex items-center space-x-2 rounded-lg bg-red-600 px-4 py-2 text-white transition-colors hover:bg-red-700"
+                className="flex items-center justify-center space-x-2 rounded-lg bg-red-600 px-3 py-2 text-sm text-white transition-colors hover:bg-red-700 sm:px-4"
                 aria-label="Sign out of your account"
               >
                 <LogOut className="h-4 w-4" />
-                <span>Logout</span>
+                <span className="hidden sm:inline">Logout</span>
+                <span className="sm:hidden">Exit</span>
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:py-8 sm:px-6 lg:px-8">
         {/* Stats Cards */}
-        <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-4">
-          <div className="rounded-lg bg-white p-6 shadow">
+        <div className="mb-6 grid grid-cols-2 gap-4 sm:mb-8 sm:gap-6 md:grid-cols-4">
+          <div className="rounded-lg bg-white p-4 shadow sm:p-6">
             <div className="flex items-center">
               <div className="rounded-lg bg-blue-100 p-2">
-                <CheckCircle className="h-6 w-6 text-blue-600" />
+                <CheckCircle className="h-5 w-5 text-blue-600 sm:h-6 sm:w-6" />
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total Projects</p>
-                <p className="text-2xl font-semibold text-gray-900">
+              <div className="ml-3 min-w-0 flex-1 sm:ml-4">
+                <p className="text-xs font-medium text-gray-600 sm:text-sm">Total Projects</p>
+                <p className="text-lg font-semibold text-gray-900 sm:text-2xl">
                   {projectsLoading ? '...' : statistics.totalProjects}
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="rounded-lg bg-white p-6 shadow">
+          <div className="rounded-lg bg-white p-4 shadow sm:p-6">
             <div className="flex items-center">
               <div className="rounded-lg bg-green-100 p-2">
-                <TrendingUp className="h-6 w-6 text-green-600" />
+                <TrendingUp className="h-5 w-5 text-green-600 sm:h-6 sm:w-6" />
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Active Tasks</p>
-                <p className="text-2xl font-semibold text-gray-900">
+              <div className="ml-3 min-w-0 flex-1 sm:ml-4">
+                <p className="text-xs font-medium text-gray-600 sm:text-sm">Active Tasks</p>
+                <p className="text-lg font-semibold text-gray-900 sm:text-2xl">
                   {projectsLoading || tasksLoading ? '...' : statistics.activeTasks}
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="rounded-lg bg-white p-6 shadow">
+          <div className="rounded-lg bg-white p-4 shadow sm:p-6">
             <div className="flex items-center">
               <div className="rounded-lg bg-yellow-100 p-2">
-                <Users className="h-6 w-6 text-yellow-600" />
+                <Users className="h-5 w-5 text-yellow-600 sm:h-6 sm:w-6" />
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Team Members</p>
-                <p className="text-2xl font-semibold text-gray-900">
+              <div className="ml-3 min-w-0 flex-1 sm:ml-4">
+                <p className="text-xs font-medium text-gray-600 sm:text-sm">Team Members</p>
+                <p className="text-lg font-semibold text-gray-900 sm:text-2xl">
                   {projectsLoading ? '...' : statistics.teamMembers}
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="rounded-lg bg-white p-6 shadow">
+          <div className="rounded-lg bg-white p-4 shadow sm:p-6">
             <div className="flex items-center">
               <div className="rounded-lg bg-purple-100 p-2">
-                <Calendar className="h-6 w-6 text-purple-600" />
+                <Calendar className="h-5 w-5 text-purple-600 sm:h-6 sm:w-6" />
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Due This Week</p>
-                <p className="text-2xl font-semibold text-gray-900">
+              <div className="ml-3 min-w-0 flex-1 sm:ml-4">
+                <p className="text-xs font-medium text-gray-600 sm:text-sm">Due This Week</p>
+                <p className="text-lg font-semibold text-gray-900 sm:text-2xl">
                   {projectsLoading || tasksLoading ? '...' : statistics.dueThisWeek}
                 </p>
               </div>
@@ -238,14 +243,14 @@ export default function DashboardClient({ user, initialProjects }: DashboardClie
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
           {/* Projects List */}
           <div className="lg:col-span-2">
             <div className="rounded-lg bg-white shadow">
-              <div className="border-b border-gray-200 px-6 py-4">
+              <div className="border-b border-gray-200 px-4 py-4 sm:px-6">
                 <h2 className="text-lg font-semibold text-gray-900">Your Projects</h2>
               </div>
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 {projectsLoading ? (
                   <div className="py-8 text-center">
                     <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-b-2 border-indigo-600"></div>
@@ -266,21 +271,23 @@ export default function DashboardClient({ user, initialProjects }: DashboardClie
                     </button>
                   </div>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {projects.map(project => (
                       <div
                         key={project._id}
-                        className="rounded-lg border border-gray-200 p-4 transition-shadow hover:shadow-md"
+                        className="rounded-lg border border-gray-200 p-3 transition-shadow hover:shadow-md sm:p-4"
                       >
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <h3 className="mb-1 text-lg font-medium text-gray-900">
+                        <div className="flex flex-col space-y-3 sm:flex-row sm:items-start sm:justify-between sm:space-y-0">
+                          <div className="min-w-0 flex-1">
+                            <h3 className="mb-1 text-base font-medium text-gray-900 sm:text-lg">
                               {project.name}
                             </h3>
-                            <p className="mb-2 text-sm text-gray-600">{project.description}</p>
-                            <div className="flex items-center space-x-4 text-sm text-gray-500">
+                            {project.description && (
+                              <p className="mb-2 text-sm text-gray-600 line-clamp-2">{project.description}</p>
+                            )}
+                            <div className="flex flex-col space-y-1 text-xs text-gray-500 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-4 sm:text-sm">
                               <span className="flex items-center">
-                                <Users className="mr-1 h-4 w-4" />
+                                <Users className="mr-1 h-3 w-3 sm:h-4 sm:w-4" />
                                 {(() => {
                                   // Handle both string[] and User[] types properly
                                   if (Array.isArray(project.members)) {
@@ -292,20 +299,22 @@ export default function DashboardClient({ user, initialProjects }: DashboardClie
                                 })()} members
                               </span>
                               <span className="flex items-center">
-                                <Calendar className="mr-1 h-4 w-4" />
-                                Updated {formatDate(project.updatedAt)}
+                                <Calendar className="mr-1 h-3 w-3 sm:h-4 sm:w-4" />
+                                <span className="hidden sm:inline">Updated </span>
+                                {formatDate(project.updatedAt)}
                               </span>
                             </div>
                           </div>
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center justify-end sm:ml-4">
                             <button 
                               onClick={() => {
                                 console.log('Navigating to project:', project._id, `/projects/${project._id}`);
                                 handleViewProject(project._id);
                               }}
-                              className="text-sm font-medium text-indigo-600 hover:text-indigo-800"
+                              className="rounded-md bg-indigo-50 px-3 py-1.5 text-sm font-medium text-indigo-600 hover:bg-indigo-100 hover:text-indigo-800 sm:bg-transparent sm:px-0 sm:py-0 sm:hover:bg-transparent"
                             >
-                              View →
+                              <span className="sm:hidden">Open</span>
+                              <span className="hidden sm:inline">View →</span>
                             </button>
                           </div>
                         </div>
@@ -318,21 +327,21 @@ export default function DashboardClient({ user, initialProjects }: DashboardClie
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* User Info */}
-            <div className="rounded-lg bg-white p-6 shadow">
-              <h3 className="mb-4 text-lg font-semibold text-gray-900">Profile</h3>
-              <div className="space-y-3">
+            <div className="rounded-lg bg-white p-4 shadow sm:p-6">
+              <h3 className="mb-3 text-base font-semibold text-gray-900 sm:mb-4 sm:text-lg">Profile</h3>
+              <div className="space-y-2 sm:space-y-3">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Name</p>
-                  <p className="text-gray-900">{user.name}</p>
+                  <p className="text-xs font-medium text-gray-600 sm:text-sm">Name</p>
+                  <p className="text-sm text-gray-900 sm:text-base">{user.name}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Email</p>
-                  <p className="text-gray-900">{user.email}</p>
+                  <p className="text-xs font-medium text-gray-600 sm:text-sm">Email</p>
+                  <p className="text-sm text-gray-900 sm:text-base break-all">{user.email}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Role</p>
+                  <p className="text-xs font-medium text-gray-600 sm:text-sm">Role</p>
                   <span className="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium capitalize text-blue-800">
                     {user.role}
                   </span>
@@ -342,9 +351,9 @@ export default function DashboardClient({ user, initialProjects }: DashboardClie
 
             {/* Admin Panel */}
             <RoleGuard requiredRole="admin">
-              <div className="rounded-lg bg-white p-6 shadow">
-                <h3 className="mb-4 text-lg font-semibold text-gray-900">Admin Panel</h3>
-                <div className="space-y-3">
+              <div className="rounded-lg bg-white p-4 shadow sm:p-6">
+                <h3 className="mb-3 text-base font-semibold text-gray-900 sm:mb-4 sm:text-lg">Admin Panel</h3>
+                <div className="space-y-2 sm:space-y-3">
                   <button className="w-full rounded-md px-3 py-2 text-left text-sm text-gray-700 hover:bg-gray-100">
                     Manage Users
                   </button>
@@ -359,27 +368,27 @@ export default function DashboardClient({ user, initialProjects }: DashboardClie
             </RoleGuard>
 
             {/* Recent Activity */}
-            <div className="rounded-lg bg-white p-6 shadow">
-              <h3 className="mb-4 text-lg font-semibold text-gray-900">Recent Activity</h3>
+            <div className="rounded-lg bg-white p-4 shadow sm:p-6">
+              <h3 className="mb-3 text-base font-semibold text-gray-900 sm:mb-4 sm:text-lg">Recent Activity</h3>
               <div className="space-y-3">
                 <div className="flex items-start space-x-3">
-                  <div className="mt-2 h-2 w-2 rounded-full bg-blue-500"></div>
-                  <div>
-                    <p className="text-sm text-gray-900">Task "Update homepage" completed</p>
+                  <div className="mt-2 h-2 w-2 rounded-full bg-blue-500 flex-shrink-0"></div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs text-gray-900 sm:text-sm">Task "Update homepage" completed</p>
                     <p className="text-xs text-gray-500">2 hours ago</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <div className="mt-2 h-2 w-2 rounded-full bg-green-500"></div>
-                  <div>
-                    <p className="text-sm text-gray-900">New project &ldquo;Mobile App&rdquo; created</p>
+                  <div className="mt-2 h-2 w-2 rounded-full bg-green-500 flex-shrink-0"></div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs text-gray-900 sm:text-sm">New project &ldquo;Mobile App&rdquo; created</p>
                     <p className="text-xs text-gray-500">1 day ago</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <div className="mt-2 h-2 w-2 rounded-full bg-yellow-500"></div>
-                  <div>
-                    <p className="text-sm text-gray-900">Team member added to project</p>
+                  <div className="mt-2 h-2 w-2 rounded-full bg-yellow-500 flex-shrink-0"></div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs text-gray-900 sm:text-sm">Team member added to project</p>
                     <p className="text-xs text-gray-500">2 days ago</p>
                   </div>
                 </div>
